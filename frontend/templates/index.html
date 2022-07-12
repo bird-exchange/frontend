@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+        <div class="card">
+            <h4 class="card-header">Загрузите и отправьте файл для обработки на сервер</h4>
+            <div class="card-body">
+                {{ form.hidden_tag() }}
+                <form action="{{ url_for('index.index') }}" enctype="multipart/form-data" method="post">
+                    <div class="form-group">
+                        {{ form.file }}
+                    </div>
+                        <small id="passwordHelpBlock" class="form-text text-muted">
+                            Your file must have jpg/jpeg/png/pdf extension.
+                        </small>
+                    <p></p>
+                    <button type="submit" class="btn btn-primary">Отправить</button>
+                </form>
+            </div>
+        </div>
+        <br>
+        <a href="{{ url_for('index.index') }}">
+            <button type="submit" class="btn btn-outline-primary">Загруженные изображения</button>
+        </a>
+{% endblock %}
