@@ -2,24 +2,89 @@
 
 {% block content %}
 
-        <div class="card">
-            <h4 class="card-header">Загрузите и отправьте файл для обработки на сервер</h4>
-            <div class="card-body">
-                {{ form.hidden_tag() }}
-                <form action="{{ url_for('index.index') }}" enctype="multipart/form-data" method="post">
-                    <div class="form-group">
-                        {{ form.file }}
-                    </div>
-                        <small id="passwordHelpBlock" class="form-text text-muted">
-                            Your file must have jpg/jpeg/png/pdf extension.
-                        </small>
-                    <p></p>
-                    <button type="submit" class="btn btn-primary">Отправить</button>
-                </form>
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+
+    <div class="container" data-aos="zoom-out" data-aos-delay="200">
+      <div class="row">
+        <div class="col-xl-6">
+          <h1>CycleGan network implementation</h1>
+          <h2>Image translation between Parus major and Sparrow</h2>
+          <a href="{{  url_for('image.images') }}" class="btn-get-started scrollto">Get Started</a>
+        </div>
+      </div>
+    </div>
+
+</section><!-- End Hero -->
+
+ 
+  <!-- ====== Example Section ======== -->
+  <section id="examples" class="portfolio">
+  
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            <h2>Examples</h2>
+        </div>
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-lg-4 col-md-6 portfolio-item">
+                <div class="container">
+                  <img src="static/assets/img/portfolio/portfolio-1.png" class="img-fluid" alt="">
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 portfolio-item">
+                <div class="container">
+                  <img src="static/assets/img/portfolio/portfolio-2.png" class="img-fluid" alt="">
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 portfolio-item">
+                <div class="container">
+                  <img src="static/assets/img/portfolio/portfolio-3.png" class="img-fluid" alt="">
+                </div>
             </div>
         </div>
-        <br>
-        <a href="{{ url_for('index.index') }}">
-            <button type="submit" class="btn btn-outline-primary">Загруженные изображения</button>
-        </a>
+    </div>
+  </section><!-- End Example Section -->
+
+
+  <!-- ======= Contact Section ======= -->
+  <section id="contact" class="contact">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-title">
+        <h2>Contact</h2>
+      </div>
+
+      <div class="row" data-aos="fade-up" data-aos-delay="100">
+        <div class="col-md-6">
+            <div class="info-box mt-4">
+                <h3>Network realisation</h3>
+                <p>
+                    <a class="btn" href="https://t.me/VladimirProtsenko">
+                        <i class="bi bi-telegram"></i>
+                    </a>
+                    <a class="btn" href="https://github.com/vladimirprotsenko">
+                        <i class="bi bi-github"></i>
+                    </a>
+                    <br>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="info-box mt-4">
+                <h3>Web application</h3>
+                <p>
+                    <a class="btn" href="https://t.me/proksen">
+                        <i class="bi bi-telegram"></i>
+                    </a>
+                    <a class="btn" href="https://github.com/ProtKsen">
+                        <i class="bi bi-github"></i>
+                    </a>
+                    <br>
+                </p>
+            </div>
+        </div>         
+      </div>
+    </div>
+  </section><!-- End Contact Section -->
 {% endblock %}
