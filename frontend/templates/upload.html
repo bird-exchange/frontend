@@ -2,24 +2,49 @@
 
 {% block content %}
 
-        <div class="card">
-            <h4 class="card-header">Загрузите и отправьте файл для обработки на сервер</h4>
-            <div class="card-body">
-                {{ form.hidden_tag() }}
-                <form action="{{ url_for('upload.upload') }}" enctype="multipart/form-data" method="post">
-                    <div class="form-group">
-                        {{ form.file }}
-                    </div>
-                        <small id="passwordHelpBlock" class="form-text text-muted">
-                            Your file must have jpg/jpeg/png/pdf extension.
-                        </small>
+<section id="examples" class="portfolio">
+
+    <p>&nbsp;</p>
+    <div class="container " data-aos="fade-up">
+        {% if kind == 'sparrow' %}
+            <div class="section-title">
+                <h2>Add Sparrow's photo</h2>
+            </div>
+        {% elif kind == 'tit' %}
+            <div class="section-title">
+                <h2>Add  Parus Major's photo</h2>
+            </div>
+        {% endif %}
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-4">
+                <div class="box">
+
+                    {{ form.hidden_tag() }}
+
                     <p></p>
-                    <button type="submit" class="btn btn-primary">Отправить</button>
-                </form>
+                    <div class="row justify-content-center text-center">
+                        
+                        <form action="{{ url_for('upload.upload', kind=kind ) }}" enctype="multipart/form-data" method="post">
+                        <div class="form-group" style="border: 0px; margin-left: 45px;">                            
+                            {{ form.file }}                           
+                        </div>
+                        <small id="passwordHelpBlock" class="form-text text-muted">
+                            Supported extensions jpg/jpeg/png.
+                        </small>
+                        <p></p>
+                        <button type="submit" class="get-started-btn" style="border: 0px; margin-left: 0px;">Send File</button>
+                        </form>
+                        <br>
+                    </div>
+
+                </div>
             </div>
         </div>
-        <br>
-        <a href="{{ url_for('index.index') }}">
-            <button type="submit" class="btn btn-outline-primary">Загруженные изображения</button>
-        </a>
+
+    </div>
+</section>
+
+<div class="container-fluid" style="padding-bottom:15vh;"></div>
+
 {% endblock %}
