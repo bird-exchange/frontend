@@ -16,7 +16,7 @@
     
                             <div class="col-5 text-center">
                                 <h2>
-                                    <a href=""><i class="bi bi-plus-circle"></i></a>
+                                    <a href="{{ url_for('upload.upload', kind='sparrow') }}"><i class="bi bi-plus-circle"></i></a>
                                     &nbsp;
                                     <a href=""><i class="bi bi-download"></i></a>
                                     &nbsp;
@@ -42,7 +42,7 @@
     
                             <div class="col-5 text-center">
                                 <h2>
-                                    <a href=""><i class="bi bi-plus-circle"></i></a>
+                                    <a href="{{ url_for('upload.upload', kind='tit') }}" ><i class="bi bi-plus-circle"></i></a>
                                     &nbsp;
                                     <a href=""><i class="bi bi-download"></i></a>
                                     &nbsp;
@@ -50,8 +50,6 @@
                                 </h2>
                             </div>
                         </div>
-                        
-
                     </div>
                 </div>
             </div>
@@ -60,6 +58,8 @@
     </div>
 </section>
 
-<div class="container-fluid" style="padding-bottom:59vh;"> </div>
+
+<div class="container-fluid" style="padding-bottom:60vh;"> 
+</div>
 
 {% endblock %}
