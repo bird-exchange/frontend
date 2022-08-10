@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from typing import Optional
 
 
-class Image(BaseModel):
+class Bird(BaseModel):
     uid: int
     name: str
     type: int

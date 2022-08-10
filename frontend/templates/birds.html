@@ -5,6 +5,7 @@
 <section id="tabs" class="tabs">
     
     <div class="row" data-aos="fade-up" data-aos-delay="200">
+
         <div class="col-6">
             <div class="container-fluid" style="height:auto;">
                 <div class="card text-bg-dark"  >
@@ -12,8 +13,7 @@
                         <div class="row">
                             <div class="col-7">
                                 <h4 class="card-text text-black fw-bold text-center" > Sparrows </h4>
-                            </div>
-    
+                            </div>    
                             <div class="col-5 text-center">
                                 <h2>
                                     <a href="{{ url_for('upload.upload', kind='sparrow') }}"><i class="bi bi-plus-circle"></i></a>
@@ -24,8 +24,6 @@
                                 </h2>
                             </div>
                         </div>
-                        
-
                     </div>
                 </div>
             </div>
@@ -38,8 +36,7 @@
                         <div class="row">
                             <div class="col-7">
                                 <h4 class="card-text fw-bold text-black text-center" > Parus Majors </h4>
-                            </div>
-    
+                            </div>    
                             <div class="col-5 text-center">
                                 <h2>
                                     <a href="{{ url_for('upload.upload', kind='tit') }}" ><i class="bi bi-plus-circle"></i></a>
@@ -57,6 +54,59 @@
 
     </div>
 </section>
+
+    <div class="row">
+        <div class="col-6">
+            {% for file in files_sparrows %}
+            <div class="row justify-content-center">
+                <div class="col-5">
+                    <div class="container">
+                        <div class="card"  >
+                            <img src="{{ file[0] }}" alt="..." >
+                            <div class="card-img-overlay d-flex align-items-end">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="container">
+                        <div class="card"  >
+                            <img src="{{ file[1] }}" alt="..." >
+                            <div class="card-img-overlay d-flex align-items-end">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>        
+            {% endfor %}
+        </div>
+        <div class="col-6">
+            {% for file in files_tits %}
+            <div class="row justify-content-center">
+                <div class="col-5">
+                    <div class="container">
+                        <div class="card"  >
+                            <img src="{{ file[0] }}" alt="..." >
+                            <div class="card-img-overlay d-flex align-items-end">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="container">
+                        <div class="card"  >
+                            <img src="{{ file[1] }}" alt="..." >
+                            <div class="card-img-overlay d-flex align-items-end">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>        
+            {% endfor %}
+        </div>
+    </div>
+
+
 
 
 <div class="container-fluid" style="padding-bottom:60vh;"> 

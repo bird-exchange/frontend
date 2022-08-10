@@ -1,24 +1,24 @@
 import httpx
 
-from frontend.schemas import Image
+from frontend.schemas import Bird
 
 
-class ImageClient:
+class BirdClient:
 
     def __init__(self, url: str):
-        self.url = f'{url}/image'
+        self.url = f'{url}/bird'
 
-    def get_all(self, kind: str) -> list[Image]:
+    def get_all(self, kind: str) -> list[Bird]:
         response = httpx.get(f'{self.url}/?kind={kind}')
         response.raise_for_status()
-        images = response.json()
-        return [Image(**image) for image in images]
+        birds = response.json()
+        return [Bird(**bird) for bird in birds]
 
-    def get_by_id(self, uid: int) -> Image:
-        response = httpx.get(f'{self.url}/image/{uid}')
+    def get_by_id(self, uid: int) -> Bird:
+        response = httpx.get(f'{self.url}/bird/{uid}')
         response.raise_for_status()
-        image = response.json()
-        return Image(**image)
+        bird = response.json()
+        return Bird(**bird)
 
     def delete_all(self) -> None:
         response = httpx.delete(f'{self.url}/')
