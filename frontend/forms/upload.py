@@ -5,7 +5,7 @@ from werkzeug.utils import secure_filename
 
 from frontend.config import config
 
-upload_url = f'{config.endpoint}/files/'
+upload_url = f'{config.endpoint}/image/'
 
 
 class UploadFileForm(FlaskForm):
