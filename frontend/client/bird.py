@@ -15,7 +15,7 @@ class BirdClient:
         return [Bird(**bird) for bird in birds]
 
     def get_by_id(self, uid: int) -> Bird:
-        response = httpx.get(f'{self.url}/bird/{uid}')
+        response = httpx.get(f'{self.url}/{uid}')
         response.raise_for_status()
         bird = response.json()
         return Bird(**bird)

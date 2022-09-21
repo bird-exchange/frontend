@@ -2,114 +2,88 @@
 
 {% block content %}
 
-<section id="tabs" class="tabs">
+<section id="birds" class="birds">
     
     <div class="row" data-aos="fade-up" data-aos-delay="200">
 
+        <!-- Sparrows images-->
         <div class="col-6">
-            <div class="container-fluid" style="height:auto;">
-                <div class="card text-bg-dark"  >
-                    <div class="card-img-overlay">
+            <form method="post" action="/birds" id="myform">
+
+                <!-- headers -->
+                <div class="row">
+                    <div class="col-7 text-center">
+                        <h4 class="card-text text-black fw-bold text-center" > Sparrows </h4>
+                    </div>
+                    <div class="col-5 text-center">
+                        
                         <div class="row">
-                            <div class="col-7">
-                                <h4 class="card-text text-black fw-bold text-center" > Sparrows </h4>
-                            </div>    
-                            <div class="col-5 text-center">
-                                <h2>
-                                    <a href="{{ url_for('upload.upload', kind='sparrow') }}"><i class="bi bi-plus-circle"></i></a>
-                                    &nbsp;
-                                    <a href=""><i class="bi bi-download"></i></a>
-                                    &nbsp;
-                                    <a href=""><i class="bi bi-trash"></i></a>
-                                </h2>
+                            <div class="col-2">
+                                <a href="{{ url_for('upload.upload', kind='sparrow') }}">
+                                    <h2><i class="bi bi-plus-circle"></i></h2>
+                                </a>
+                            </div>
+                            
+                            <div class="col-2">
+                                <button type="submit" class="btn btn-primary">
+                                    <h2> <i class="bi bi-download"></i> </h2>
+                                </button> 
+                            </div>                        
+                                                       
+                            <div class="col-2">
+                                <button type="submit" class="btn btn-delete">
+                                    <h2>  <i class="bi bi-trash"></i> </h2>
+                                </button>
+                            </div>
+
+                            <div class="col-2">
+                                <a href="#" type="submit" class="btn btn-delete">
+                                    <h2> <i class="bi bi-trash"></i> </h2>
+                                </a>
+                            </div>
+
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <!-- images -->
+                <div class="row">
+                    {% for sparrow in sparrows %}
+            
+                    <div class="row justify-content-center">
+                        <div class="col-1">
+                            <div class="container">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{sparrow.uid}}" name="sparrows_{{sparrow.uid}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="container">
+                                <div class="card"  >
+                                    <img src="{{ sparrow.url_origin }}" alt="..." >
+                                    <div class="card-img-overlay d-flex align-items-end"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="container">
+                                <div class="card"  >
+                                    <img src="{{ sparrow.url_result }}" alt="..." >
+                                    <div class="card-img-overlay d-flex align-items-end">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    {% endfor %}  
                 </div>
-            </div>
+            </form>
         </div>
-    
-        <div class="col-6">
-            <div class="container-fluid" style="height:auto;">
-                <div class="card text-bg-dark"  >
-                    <div class="card-img-overlay">
-                        <div class="row">
-                            <div class="col-7">
-                                <h4 class="card-text fw-bold text-black text-center" > Parus Majors </h4>
-                            </div>    
-                            <div class="col-5 text-center">
-                                <h2>
-                                    <a href="{{ url_for('upload.upload', kind='tit') }}" ><i class="bi bi-plus-circle"></i></a>
-                                    &nbsp;
-                                    <a href=""><i class="bi bi-download"></i></a>
-                                    &nbsp;
-                                    <a href=""><i class="bi bi-trash"></i></a>
-                                </h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-    </div>
-</section>
-
-    <div class="row">
-        <div class="col-6">
-            {% for file in images_sparrows %}
-            <div class="row justify-content-center">
-                <div class="col-5">
-                    <div class="container">
-                        <div class="card"  >
-                            <img src="{{ file[0] }}" alt="..." >
-                            <div class="card-img-overlay d-flex align-items-end">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-5">
-                    <div class="container">
-                        <div class="card"  >
-                            <img src="{{ file[1] }}" alt="..." >
-                            <div class="card-img-overlay d-flex align-items-end">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>        
-            {% endfor %}
-        </div>
-        <div class="col-6">
-            {% for file in images_tits %}
-            <div class="row justify-content-center">
-                <div class="col-5">
-                    <div class="container">
-                        <div class="card"  >
-                            <img src="{{ file[0] }}" alt="..." >
-                            <div class="card-img-overlay d-flex align-items-end">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-5">
-                    <div class="container">
-                        <div class="card"  >
-                            <img src="{{ file[1] }}" alt="..." >
-                            <div class="card-img-overlay d-flex align-items-end">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>        
-            {% endfor %}
-        </div>
-    </div>
-
-
-
-
-<div class="container-fluid" style="padding-bottom:60vh;"> 
-</div>
+    {% if not (sparrows or tits) %} 
+    <div class="container-fluid" style="padding-bottom:60vh;"></div>
+    {% endif %}
 
 {% endblock %}

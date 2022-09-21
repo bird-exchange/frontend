@@ -493,6 +493,62 @@ section {
 }
 
 /*--------------------------------------------------------------
+# Bird Table
+--------------------------------------------------------------*/
+.birds .nav-birds {
+    border: 0;
+  }
+  
+  .birds .nav-link {
+    border: 1px solid #b9b9b9;
+    transition: 0.3s;
+    color: #111111;
+    border-radius: 0;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 48px;
+  }
+  
+  .birds .nav-link i {
+    padding-right: 0px;
+    font-size: 48px;
+  }
+  
+  .birds .nav-link h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  .birds .nav-link:hover {
+    color: #e03a3c;
+  }
+  
+  .birds .nav-link.active {
+    background: #e03a3c;
+    color: #fff;
+    border-color: #e03a3c;
+  }
+
+  .birds .btn-primary {
+    border: 0px;
+    transition: 0.3s;
+    color: #111111;
+    border-radius: 0;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #fff;
+    font-size: 35px;
+    padding-top: 0ch;
+  }
+
+  .birds .btn-primary:hover {
+    color: #e03a3c;
+  }
+
+/*--------------------------------------------------------------
 # Breadcrumbs
 --------------------------------------------------------------*/
 .breadcrumbs {
