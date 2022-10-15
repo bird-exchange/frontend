@@ -1,5 +1,5 @@
-import shutil
 import pathlib
+import shutil
 import zipfile
 
 import httpx
@@ -32,14 +32,15 @@ def birds():
 
 @view.route('/download/<int:bird_id>')
 def download(bird_id: int):
-    image_origin_path = app_client.image.get_url_origin_image(bird_id)
-    image_result_path = app_client.image.get_url_result_image(bird_id)
+    image_origin_url = app_client.image.get_url_origin_image(bird_id)
+    image_result_url = app_client.image.get_url_result_image(bird_id)
 
-    bird_name = app_client.bird.get_by_id(bird_id).name
-    image_origin = httpx.get(image_origin_path).content
-    image_result = httpx.get(image_result_path).content
+    image_origin = httpx.get(image_origin_url).content
+    image_result = httpx.get(image_result_url).content
 
     pathlib.Path('frontend/temp').mkdir(parents=True, exist_ok=True)
+
+    bird_name = app_client.bird.get_by_id(bird_id).name
 
     image_origin_path = pathlib.Path(f'frontend/temp/origin_{bird_name}')
     image_result_path = pathlib.Path(f'frontend/temp/result_{bird_name}')
