@@ -2,88 +2,104 @@
 
 {% block content %}
 
+{% include 'birds_menu.html' %}
+
 <section id="birds" class="birds">
     
     <div class="row" data-aos="fade-up" data-aos-delay="200">
 
         <!-- Sparrows images-->
         <div class="col-6">
-            <form method="post" action="/birds" id="myform">
+            <br>
+            <div class="row ">
+                <div class="col-6 text-center">
+                    <h4 class="card-text text-black fw-bold text-center" > Sparrows </h4>
+                </div>
+                <div class="col-2">
+                    <a href="{{ url_for('upload.upload', kind='sparrow') }}">
+                        <h2><i class="bi bi-plus-circle"></i></h2>
+                    </a>
+                </div>
+            </div>
 
-                <!-- headers -->
-                <div class="row">
-                    <div class="col-7 text-center">
-                        <h4 class="card-text text-black fw-bold text-center" > Sparrows </h4>
-                    </div>
-                    <div class="col-5 text-center">
+            <section id="portfolio" class="portfolio" style="padding: 20px">
+                <div class="container" data-aos="fade-up"> 
+                    <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
                         
-                        <div class="row">
-                            <div class="col-2">
-                                <a href="{{ url_for('upload.upload', kind='sparrow') }}">
-                                    <h2><i class="bi bi-plus-circle"></i></h2>
-                                </a>
+                        {% for sparrow in sparrows %}
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-sparrow">
+                          <div class="portfolio-wrap">
+                            <img src="{{ sparrow.url_origin }}" class="img-fluid" alt="">
+                            {% if sparrow.url_result != '' %}
+                                <img src="{{ sparrow.url_result }}" class="img-fluid" alt="">
+                            {% else %}
+                                <img src="../static/assets/img/gif_waiting.gif" class="img-fluid" alt="">
+                            {% endif %}
+                            <div class="portfolio-info">
+                              <div class="portfolio-links">
+                                <a href="{{ url_for('bird.download', bird_id=sparrow.uid) }}"><i class="bx bx-download"></i></a>
+                                <a href="{{ url_for('bird.delete', bird_id=sparrow.uid) }}"><i class="bx bx-trash"></i></a>
+                              </div>
                             </div>
-                            
-                            <div class="col-2">
-                                <button type="submit" class="btn btn-primary">
-                                    <h2> <i class="bi bi-download"></i> </h2>
-                                </button> 
-                            </div>                        
-                                                       
-                            <div class="col-2">
-                                <button type="submit" class="btn btn-delete">
-                                    <h2>  <i class="bi bi-trash"></i> </h2>
-                                </button>
-                            </div>
-
-                            <div class="col-2">
-                                <a href="#" type="submit" class="btn btn-delete">
-                                    <h2> <i class="bi bi-trash"></i> </h2>
-                                </a>
-                            </div>
-
+                          </div>
                         </div>
-                        
+                        {% endfor %}           
+  
                     </div>
                 </div>
-                
-                <!-- images -->
-                <div class="row">
-                    {% for sparrow in sparrows %}
-            
-                    <div class="row justify-content-center">
-                        <div class="col-1">
-                            <div class="container">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="{{sparrow.uid}}" name="sparrows_{{sparrow.uid}}">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-5">
-                            <div class="container">
-                                <div class="card"  >
-                                    <img src="{{ sparrow.url_origin }}" alt="..." >
-                                    <div class="card-img-overlay d-flex align-items-end"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-5">
-                            <div class="container">
-                                <div class="card"  >
-                                    <img src="{{ sparrow.url_result }}" alt="..." >
-                                    <div class="card-img-overlay d-flex align-items-end">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}  
-                </div>
-            </form>
+            </section>
+
         </div>
+        <!-- end Sparrows images-->
+
+         <!-- Tits images-->
+         <div class="col-6">
+            <br>
+            <div class="row ">
+                <div class="col-6 text-center">
+                    <h4 class="card-text text-black fw-bold text-center" > Parus Majors </h4>
+                </div>
+                <div class="col-2">
+                    <a href="{{ url_for('upload.upload', kind='tit') }}">
+                        <h2><i class="bi bi-plus-circle"></i></h2>
+                    </a>
+                </div>
+            </div>
+
+            <section id="portfolio" class="portfolio" style="padding: 20px">
+                <div class="container" data-aos="fade-up"> 
+                    <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+                        
+                        {% for tit in tits %}
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-tit">
+                          <div class="portfolio-wrap">
+                            <img src="{{ tit.url_origin }}" class="img-fluid" alt="">
+                            {% if tit.url_result != '' %}
+                                <img src="{{ tit.url_result }}" class="img-fluid" alt="">
+                            {% else %}
+                                <img src="../static/assets/img/gif_waiting.gif" class="img-fluid" alt="">
+                            {% endif %}
+                            <div class="portfolio-info">
+                              <div class="portfolio-links">
+                                <a href="{{ url_for('bird.download', bird_id=tit.uid) }}"><i class="bx bx-download"></i></a>
+                                <a href="{{ url_for('bird.delete', bird_id=tit.uid) }}"><i class="bx bx-trash"></i></a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        {% endfor %}           
+  
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        <!-- end Tits images-->
+            
+    </div>
 
     {% if not (sparrows or tits) %} 
-    <div class="container-fluid" style="padding-bottom:60vh;"></div>
+    <div class="container-fluid" style="padding-bottom:41vh;"></div>
     {% endif %}
 
 {% endblock %}

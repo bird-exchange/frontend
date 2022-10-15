@@ -2,6 +2,8 @@
 
 {% block content %}
 
+{% include 'upload_menu.html' %}
+
 <section id="examples" class="portfolio">
 
     <p>&nbsp;</p>
@@ -34,10 +36,12 @@
                         </small>
                         <p></p>
                         <button type="submit" class="get-started-btn" style="border: 0px; margin-left: 0px;">Send File</button>
-                        </form>
+                        <a href="{{ url_for('bird.birds') }}" class="btn btn-outline-danger" >Close</a> 
+                    </form>
                         <br>
                     </div>
 
+                    
                 </div>
             </div>
         </div>

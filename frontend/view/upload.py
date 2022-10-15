@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect, url_for
 
 from frontend.forms.upload import UploadFileForm
 
@@ -11,5 +11,6 @@ def upload(kind: str):
 
     if form.validate_on_submit():
         form.upload_file(kind=kind)
+        return redirect(url_for('bird.birds'))
 
     return render_template('upload.html', form=form, kind=kind)

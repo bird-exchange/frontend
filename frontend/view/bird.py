@@ -1,58 +1,71 @@
+import shutil
 import pathlib
+import zipfile
 
 import httpx
-from flask import Blueprint, render_template, request, send_file
+from flask import Blueprint, redirect, render_template, send_file, url_for
 
 from frontend.client.api import app_client
 
 view = Blueprint('bird', __name__)
 
 
-@view.route('/', methods=['GET', 'POST', 'DELETE'])
+@view.route('/')
 def birds():
 
-    if request.method == 'GET':
+    sparrows = app_client.bird.get_all(kind='sparrow')
+    tits = app_client.bird.get_all(kind='tit')
 
-        sparrows = app_client.bird.get_all(kind='sparrow')
-        tits = app_client.bird.get_all(kind='tit')
+    for sparrow in sparrows:
+        sparrow.url_origin = app_client.image.get_url_origin_image(sparrow.uid)
+        sparrow.url_result = app_client.image.get_url_result_image(sparrow.uid)
 
-        for sparrow in sparrows:
-            sparrow.url_origin = app_client.image.get_url_origin_image(sparrow.uid)
-            sparrow.url_result = app_client.image.get_url_result_image(sparrow.uid)
+    for tit in tits:
+        tit.url_origin = app_client.image.get_url_origin_image(tit.uid)
+        tit.url_result = app_client.image.get_url_result_image(tit.uid)
 
-        for tit in tits:
-            tit.url_origin = app_client.image.get_url_origin_image(tit.uid)
-            tit.url_result = app_client.image.get_url_result_image(tit.uid)
+    return render_template(
+        'birds.html',
+        sparrows=sparrows,
+        tits=tits)
 
-        return render_template(
-            'birds.html',
-            sparrows=sparrows,
-            tits=tits)
 
-    elif request.method == 'POST':
-        form_data = request.form.keys()
-        bird_uids = []
-        for check_input in form_data:
-            bird_uids.append(int(request.form[check_input]))
+@view.route('/download/<int:bird_id>')
+def download(bird_id: int):
+    image_origin_path = app_client.image.get_url_origin_image(bird_id)
+    image_result_path = app_client.image.get_url_result_image(bird_id)
 
-        for uid in bird_uids:
-            image_origin_path = app_client.image.get_url_origin_image(uid)
-            bird_name = app_client.bird.get_by_id(uid).name
-            image = httpx.get(image_origin_path).content
-            pathlib.Path('frontend/temp').mkdir(parents=True, exist_ok=True)
+    bird_name = app_client.bird.get_by_id(bird_id).name
+    image_origin = httpx.get(image_origin_path).content
+    image_result = httpx.get(image_result_path).content
 
-            image_path = pathlib.Path(f'frontend/temp/{bird_name}')
-            with open(image_path, 'wb') as f_in:
-                f_in.write(image)
+    pathlib.Path('frontend/temp').mkdir(parents=True, exist_ok=True)
 
-        return send_file(
-            f'temp/{bird_name}',
-            as_attachment=True)
+    image_origin_path = pathlib.Path(f'frontend/temp/origin_{bird_name}')
+    image_result_path = pathlib.Path(f'frontend/temp/result_{bird_name}')
 
-    elif request.method == 'DELETE':
-        form_data = request.form.keys()
-        bird_uids = []
-        for check_input in form_data:
-            bird_uids.append(int(request.form[check_input]))
-        for uid in bird_uids:
-            app_client.bird.delete_by_id(uid)
+    with open(image_origin_path, 'wb') as f_in:
+        f_in.write(image_origin)
+    with open(image_result_path, 'wb') as f_in:
+        f_in.write(image_result)
+
+    zipfolder = zipfile.ZipFile('frontend/Birdfiles.zip', 'w', compression=zipfile.ZIP_STORED)
+
+    zipfolder.write(image_origin_path, arcname='origin.jpg')
+    zipfolder.write(image_result_path, arcname='result.jpg')
+    zipfolder.close()
+
+    shutil.rmtree('frontend/temp')
+
+    return send_file(
+        'Birdfiles.zip',
+        mimetype='zip',
+        attachment_filename='Birdfiles.zip',
+        as_attachment=True
+    )
+
+
+@view.route('/delete/<int:bird_id>')
+def delete(bird_id: int):
+    app_client.bird.delete_by_id(bird_id)
+    return redirect(url_for('bird.birds'))
