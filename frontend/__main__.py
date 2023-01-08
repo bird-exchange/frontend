@@ -1,7 +1,6 @@
 import logging
 
-import config
-
+from frontend.config import config
 from frontend.app import create_app
 
 logger = logging.getLogger(__name__)
