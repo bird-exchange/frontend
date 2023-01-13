@@ -13,8 +13,8 @@ def load_from_env() -> AppConfig:
     endpoint = os.environ['ENDPOINT']
     return AppConfig(
         endpoint=endpoint,
-        host=os.environ['APP_HOST'],
-        port=int(os.environ['APP_PORT'])
+        host=os.environ['APP_HOST_FRONT'],
+        port=int(os.environ['APP_PORT_FRONT'])
     )
 
 
