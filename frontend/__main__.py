@@ -11,7 +11,7 @@ def main():
     logger.info('application started')
 
     app = create_app()
-    app.run(host=config.host, port=config.port, debug=False)
+    app.run(host=config.server.host, port=config.server.port, debug=False)
 
 
 if __name__ == "__main__":
