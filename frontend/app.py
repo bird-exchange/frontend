@@ -1,6 +1,6 @@
 from flask import Flask
 
-from frontend.view import bird, index, upload
+from frontend.view import bird, image, index
 
 
 def create_app():
@@ -8,6 +8,6 @@ def create_app():
 
     app.register_blueprint(index.view)
     app.register_blueprint(bird.view, url_prefix='/birds')
-    app.register_blueprint(upload.view, url_prefix='/upload')
+    app.register_blueprint(image.view, url_prefix='/image')
 
     return app
