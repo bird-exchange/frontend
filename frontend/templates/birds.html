@@ -16,7 +16,7 @@
                     <h4 class="card-text text-black fw-bold text-center" > Sparrows </h4>
                 </div>
                 <div class="col-2">
-                    <a href="{{ url_for('upload.upload', kind='sparrow') }}">
+                    <a href="{{ url_for('image.upload', kind='sparrow') }}">
                         <h2><i class="bi bi-plus-circle"></i></h2>
                     </a>
                 </div>
@@ -29,11 +29,11 @@
                         {% for sparrow in sparrows %}
                         <div class="col-lg-4 col-md-6 portfolio-item filter-sparrow">
                           <div class="portfolio-wrap">
-                            <img src="{{ sparrow.url_origin }}" class="img-fluid" alt="">
-                            {% if sparrow.url_result != '' %}
-                                <img src="{{ sparrow.url_result }}" class="img-fluid" alt="">
+                            <img src="{{ url_for('image.send',  filename='input-images/'+ sparrow.name) }}" class="img-fluid" alt="">
+                            {% if sparrow.was_fitted == 1 %}
+                                <img src="{{ url_for('image.send',  filename='output-images/'+ sparrow.name) }}" class="img-fluid" alt="">
                             {% else %}
-                                <img src="../static/assets/img/gif_waiting.gif" class="img-fluid" alt="">
+                                <img src="/static/assets/img/gif_waiting.gif" class="img-fluid" alt="">
                             {% endif %}
                             <div class="portfolio-info">
                               <div class="portfolio-links">
@@ -60,7 +60,7 @@
                     <h4 class="card-text text-black fw-bold text-center" > Parus Majors </h4>
                 </div>
                 <div class="col-2">
-                    <a href="{{ url_for('upload.upload', kind='tit') }}">
+                    <a href="{{ url_for('image.upload', kind='tit') }}">
                         <h2><i class="bi bi-plus-circle"></i></h2>
                     </a>
                 </div>
@@ -73,9 +73,9 @@
                         {% for tit in tits %}
                         <div class="col-lg-4 col-md-6 portfolio-item filter-tit">
                           <div class="portfolio-wrap">
-                            <img src="{{ tit.url_origin }}" class="img-fluid" alt="">
-                            {% if tit.url_result != '' %}
-                                <img src="{{ tit.url_result }}" class="img-fluid" alt="">
+                            <img src="{{ url_for('image.send',  filename='input-images/'+ tit.name) }}" class="img-fluid" alt="">
+                            {% if tit.was_fitted == 1 %}
+                                <img src="{{ url_for('image.send',  filename='output-images/'+ tit.name) }}" class="img-fluid" alt="">
                             {% else %}
                                 <img src="../static/assets/img/gif_waiting.gif" class="img-fluid" alt="">
                             {% endif %}
